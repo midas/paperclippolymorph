@@ -54,7 +54,15 @@ module LocusFocus
           super
           Asset.transaction do
             the_asset = Asset.find_or_initialize_by_data_file_name(self.data.original_filename)
-            the_asset.data = data
+            the_asset.data = self.data
+
+            self.instance_variables.each do |var|
+              if var.include?( "@#{attachable_field}_" )
+                attr_name = var.gsub( /@#{attachable_field}_/, '' )
+                the_asset.send( "#{attr_name}=".to_sym, self.send( var.gsub( /@/, '' ).to_sym ) ) if the_asset.respond_to?( "#{attr_name}=".to_sym )
+              end
+            end
+
             if the_asset.save
       
               # This association may be saved more than once within the same request / response 
