@@ -61,6 +61,8 @@ module LocusFocus
             the_asset = Asset.find_or_initialize_by_data_file_name(self.data.original_filename)
             the_asset.data = self.data
 
+            # Set any attributes (or other variables) in the asset model from the attributes or variables in 
+            # the owning model.  Essentially a pass through from the form.
             self.instance_variables.each do |var|
               if var.include?( "@#{attachable_field}_" )
                 attr_name = var.gsub( /@#{attachable_field}_/, '' )

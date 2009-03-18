@@ -26,6 +26,24 @@ end
 @essay.assets.asset.detach -or- @essay.assets.detach(@asset)
 </pre>
 
+h4. Pass Through Attributes
+
+You can create attributes acts_as_polymorphic_paperclip that will pass through their values to the asset model:
+
+In the assets table, create a field called description.
+
+In the PhotoEssay model, add the attributes.  They should be prefixed with the name of the file data field:
+
+<pre>
+attr_accessor :data_description
+</pre>
+
+In the form:
+
+<pre>
+<%= f.text_field :data_description %>
+</pre>
+
 h4. Helper methods
 
 There is one helper method so far used to determine if the asset can be displayed in a browser
