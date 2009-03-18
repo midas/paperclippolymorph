@@ -44,6 +44,9 @@ In the form:
 <%= f.text_field :data_description %>
 </pre>
 
+Now, when the form is submitted, the value in the PhotoEssay data_description field will pass through to the
+Essay description field.
+
 h4. Helper methods
 
 There is one helper method so far used to determine if the asset can be displayed in a browser
